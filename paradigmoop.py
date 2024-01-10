@@ -30,6 +30,7 @@ class StartsWithStrategy:
         
     def invokeStrategy(self, string):
         if string[0] == self.startsWithChar: 
+            return True 
         else:
             return False
 
