@@ -29,16 +29,13 @@ class StartsWithStrategy:
         self.startsWithChar = key
         
     def invokeStrategy(self, string):
-        if string[0] == self.startsWithChar:  # Fix: added self.
-            return True
+        if string[0] == self.startsWithChar: 
         else:
             return False
 
 class StringFilterController:
-    @staticmethod
-    def filter(string_list, strategy):
-        result = [s for s in string_list if strategy.invokeStrategy(s)]
-        return result
+    def filter(string_list):
+        result = []
 
 words_array = ["apple", "banana", "cherry", "grape"]
 
