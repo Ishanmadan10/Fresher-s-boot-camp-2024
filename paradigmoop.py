@@ -35,8 +35,9 @@ class StartsWithStrategy:
             return False
 
 class StringFilterController:
-    def filter(string_list):
-        result = []
+    predicate = StartsWithStrategy()
+    result = []
+       
 
 words_array = ["apple", "banana", "cherry", "grape"]
 
