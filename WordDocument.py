@@ -19,12 +19,10 @@ class Paragraph(DocumentPart):
         super().__init__(name, position)
         self.content = content
 
-    def save(self):
-        
+    def save(self):  
         pass
 
     def paint(self):
-        
         pass
 
 
@@ -34,11 +32,9 @@ class Hyperlink(DocumentPart):
         self.url = url
 
     def save(self):
-        
         pass
 
     def paint(self):
-       
         pass
 
 
@@ -47,12 +43,10 @@ class Header(DocumentPart):
         super().__init__(name, position)
         self.title = title
 
-    def save(self):
-        
+    def save(self): 
         pass
 
-    def paint(self):
-        
+    def paint(self): 
         pass
 
 
@@ -62,11 +56,9 @@ class Footer(DocumentPart):
         self.text = text
 
     def save(self):
-       
         pass
 
-    def paint(self):
-        
+    def paint(self): 
         pass
 
 
@@ -75,7 +67,6 @@ class Document:
         self.parts = []
 
     def open(self):
-      
         pass
 
 
