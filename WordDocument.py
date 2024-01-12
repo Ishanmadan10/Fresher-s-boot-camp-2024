@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
 
 class DocumentPart(ABC):
-    def _init_(self, part_name, part_position):
-        self.part_name = part_name
-        self.part_position = part_position
+    def _init_(self, name, position):
+        self.name = name
+        self.position = position
     
     @abstractmethod
     def paint(self):
@@ -12,71 +12,120 @@ class DocumentPart(ABC):
     @abstractmethod
     def save(self):
         pass
-
-class WordDocument:
-    def _init_(self):
-        self.part_list = []
-
-    def open(self):
-        for doc_part in self.part_list:
-            doc_part.paint()
-
-    def save(self):
-        for doc_part in self.part_list:
-            doc_part.save()
+    
+    @abstractmethod
+    def convert(self, i_converter):
+        pass
 
 class Header(DocumentPart):
-    def _init_(self, title, position):
-        super()._init_('Header', position)
+    def _init_(self, title):
+        super()._init_("", "")
         self.title = title
     
     def paint(self):
-       
-        pass
+        print("paint() called from header")
     
     def save(self):
-       
-        pass
-
-class Footer(DocumentPart):
-    def _init_(self, text, position):
-        super()._init_('Footer', position)
-        self.text = text
+        print("save() called from header")
     
-    def paint(self):
-       
-        pass
-    
-    def save(self):
-       
-        pass
+    def convert(self, i_converter):
+        i_converter.convertheader(self)
 
 class Paragraph(DocumentPart):
-    def _init_(self, content, lines, position):
-        super()._init_('Paragraph', position)
+    def _init_(self, content, lines):
+        super()._init_("", "")
         self.content = content
         self.lines = lines
     
     def paint(self):
-        
-        pass
+        print("paint() called from paragraph")
     
     def save(self):
-      
-        pass
+        print("save() called from paragraph")
+    
+    def convert(self, i_converter):
+        i_converter.convertparagraph(self)
 
-class Hyperlink(DocumentPart):
-    def _init_(self, link, position):
-        super()._init_('Hyperlink', position)
-        self.link = link
+class HyperLink(DocumentPart):
+    def _init_(self, url, text):
+        super()._init_("", "")
+        self.url = url
+        self.text = text
     
     def paint(self):
-        
-        pass
+        print("paint() called from hyperlink")
     
     def save(self):
-        
+        print("save() called from hyperlink")
+    
+    def convert(self, i_converter):
+        i_converter.converthyperlink(self)
+
+class Footer(DocumentPart):
+    def _init_(self, text):
+        super()._init_("", "")
+        self.text = text
+    
+    def paint(self):
+        print("paint() called from footer")
+    
+    def save(self):
+        print("save() called from footer")
+    
+    def convert(self, i_converter):
+        i_converter.convertfooter(self)
+
+class WordDocument:
+    def _init_(self, document_part_list):
+        self.document_parts = document_part_list
+    
+    def open(self):
+        for part_item in self.document_parts:
+            part_item.paint()
+            part_item.save()
+    
+    def convert(self, i_converter):
+        for part_item in self.document_parts:
+            part_item.convert(i_converter)
+
+class ConverterInterface(ABC):
+    @abstractmethod
+    def convertheader(self, header_item):
+        pass
+    
+    @abstractmethod
+    def convertparagraph(self, paragraph_item):
+        pass
+    
+    @abstractmethod
+    def converthyperlink(self, hyperlink_item):
+        pass
+    
+    @abstractmethod
+    def convertfooter(self, footer_item):
         pass
 
+class HTMLConverter(ConverterInterface):
+    def convertheader(self, header_item):
+        print("header converted")
+    
+    def convertparagraph(self, paragraph_item):
+        print("paragraph converted")
+    
+    def converthyperlink(self, hyperlink_item):
+        print("hyperlink converted")
+    
+    def convertfooter(self, footer_item):
+        print("footer converted")
+
 if __name__ == "_main_":
-    print("Hello World")
+    header1 = Header("header", "hhhhh")
+    paragraph1 = Paragraph("para","this is a paragraph")
+    hyperlink1 = HyperLink("hyperlinkr", "https://example.com")
+    footer1 = Footer("footer","example")
+    
+    document_part_list = [header1, paragraph1, hyperlink1, footer1]
+    word_document1 = WordDocument(document_part_list)
+    html_converter = HTMLConverter()
+    
+    word_document1.convert(html_converter)
