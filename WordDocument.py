@@ -1,93 +1,82 @@
 from abc import ABC, abstractmethod
 
 class DocumentPart(ABC):
-    def __init__(self, name, position):
-        self.name = name
-        self.position = position
-
+    def _init_(self, part_name, part_position):
+        self.part_name = part_name
+        self.part_position = part_position
+    
+    @abstractmethod
+    def paint(self):
+        pass
+    
     @abstractmethod
     def save(self):
         pass
 
-    @abstractmethod
-    def paint(self):
-        pass
-
-
-class Paragraph(DocumentPart):
-    def __init__(self, name, position, content):
-        super().__init__(name, position)
-        self.content = content
-
-    def save(self):  
-        pass
-
-    def paint(self):
-        pass
-
-
-class Hyperlink(DocumentPart):
-    def __init__(self, name, position, url):
-        super()._init_(name, position)
-        self.url = url
-
-    def save(self):
-        pass
-
-    def paint(self):
-        pass
-
-
-class Header(DocumentPart):
-    def __init__(self, name, position, title):
-        super().__init__(name, position)
-        self.title = title
-
-    def save(self): 
-        pass
-
-    def paint(self): 
-        pass
-
-
-class Footer(DocumentPart):
-    def __init__(self, name, position, text):
-        super().__init__(name, position)
-        self.text = text
-
-    def save(self):
-        pass
-
-    def paint(self): 
-        pass
-
-
-class Document:
-    def __init__(self):
-        self.parts = []
+class WordDocument:
+    def _init_(self):
+        self.part_list = []
 
     def open(self):
+        for doc_part in self.part_list:
+            doc_part.paint()
+
+    def save(self):
+        for doc_part in self.part_list:
+            doc_part.save()
+
+class Header(DocumentPart):
+    def _init_(self, title, position):
+        super()._init_('Header', position)
+        self.title = title
+    
+    def paint(self):
+       
+        pass
+    
+    def save(self):
+       
         pass
 
-
-def main():
+class Footer(DocumentPart):
+    def _init_(self, text, position):
+        super()._init_('Footer', position)
+        self.text = text
     
-    document = Document()
-
-    paragraph = Paragraph("Para1", 1, "This is a paragraph.")
-    hyperlink = Hyperlink("Link1", 2, "https://example.com")
-    header = Header("Header1", 3, "Document Header")
-    footer = Footer("Footer1", 4, "Document Footer")
-
-    document.parts.extend([paragraph, hyperlink, header, footer])
-
+    def paint(self):
+       
+        pass
     
-    for part in document.parts:
-        part.save()
-        part.paint()
+    def save(self):
+       
+        pass
 
-    document.open()
+class Paragraph(DocumentPart):
+    def _init_(self, content, lines, position):
+        super()._init_('Paragraph', position)
+        self.content = content
+        self.lines = lines
+    
+    def paint(self):
+        
+        pass
+    
+    def save(self):
+      
+        pass
 
+class Hyperlink(DocumentPart):
+    def _init_(self, link, position):
+        super()._init_('Hyperlink', position)
+        self.link = link
+    
+    def paint(self):
+        
+        pass
+    
+    def save(self):
+        
+        pass
 
 if __name__ == "_main_":
-    main()
+    print("Hello World")
