@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 class DocumentPart(ABC):
-    def _init_(self, name, position):
+    def __init__(self, name, position):
         self.name = name
         self.position = position
     
@@ -18,8 +18,8 @@ class DocumentPart(ABC):
         pass
 
 class Header(DocumentPart):
-    def _init_(self, title):
-        super()._init_("", "")
+    def __init__(self, title):
+        super().__init__("", "")
         self.title = title
     
     def paint(self):
@@ -32,8 +32,8 @@ class Header(DocumentPart):
         i_converter.convertHeader(self)
 
 class Paragraph(DocumentPart):
-    def _init_(self, content, lines):
-        super()._init_("", "")
+    def __init__(self, content, lines):
+        super().__init__("", "")
         self.content = content
         self.lines = lines
     
@@ -47,8 +47,8 @@ class Paragraph(DocumentPart):
         i_converter.convertParagraph(self)
 
 class HyperLink(DocumentPart):
-    def _init_(self, url, text):
-        super()._init_("", "")
+    def __init__(self, url, text):
+        super().__init__("", "")
         self.url = url
         self.text = text
     
@@ -62,8 +62,8 @@ class HyperLink(DocumentPart):
         i_converter.convertHyperlink(self)
 
 class Footer(DocumentPart):
-    def _init_(self, text):
-        super()._init_("", "")
+    def __init__(self, text):
+        super().__init__("", "")
         self.text = text
     
     def paint(self):
@@ -76,7 +76,7 @@ class Footer(DocumentPart):
         i_converter.convertFooter(self)
 
 class WordDocument:
-    def _init_(self, document_part_list):
+    def __init__(self, document_part_list):
         self.document_parts = document_part_list
     
     def open(self):
