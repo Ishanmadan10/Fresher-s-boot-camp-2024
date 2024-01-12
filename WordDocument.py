@@ -90,32 +90,32 @@ class WordDocument:
 
 class ConverterInterface(ABC):
     @abstractmethod
-    def convertHeader(self, header_item):
+    def convertHeader(self):
         pass
     
     @abstractmethod
-    def convertParagraph(self, paragraph_item):
+    def convertParagraph(self):
         pass
     
     @abstractmethod
-    def convertHyperlink(self, hyperlink_item):
+    def convertHyperlink(self):
         pass
     
     @abstractmethod
-    def convertFooter(self, footer_item):
+    def convertFooter(self):
         pass
 
 class HTMLConverter(ConverterInterface):
-    def convertHeader(self, header_item):
+    def convertHeader(self):
         print("header converted")
     
-    def convertParagraph(self, paragraph_item):
+    def convertParagraph(self):
         print("paragraph converted")
     
-    def convertHyperlink(self, hyperlink_item):
+    def convertHyperlink(self):
         print("hyperlink converted")
     
-    def convertFooter(self, footer_item):
+    def convertFooter(self):
         print("footer converted")
 
 if __name__ == "_main_":
