@@ -29,7 +29,7 @@ class Header(DocumentPart):
         print("save header")
     
     def convert(self, i_converter):
-        i_converter.convertheader(self)
+        i_converter.convertHeader(self)
 
 class Paragraph(DocumentPart):
     def _init_(self, content, lines):
@@ -44,7 +44,7 @@ class Paragraph(DocumentPart):
         print("save paragraph")
     
     def convert(self, i_converter):
-        i_converter.convertparagraph(self)
+        i_converter.convertParagraph(self)
 
 class HyperLink(DocumentPart):
     def _init_(self, url, text):
@@ -59,7 +59,7 @@ class HyperLink(DocumentPart):
         print("save hyperlink")
     
     def convert(self, i_converter):
-        i_converter.converthyperlink(self)
+        i_converter.convertHyperlink(self)
 
 class Footer(DocumentPart):
     def _init_(self, text):
@@ -73,7 +73,7 @@ class Footer(DocumentPart):
         print("save footer")
     
     def convert(self, i_converter):
-        i_converter.convertfooter(self)
+        i_converter.convertFooter(self)
 
 class WordDocument:
     def _init_(self, document_part_list):
@@ -90,32 +90,32 @@ class WordDocument:
 
 class ConverterInterface(ABC):
     @abstractmethod
-    def convertheader(self, header_item):
+    def convertHeader(self, header_item):
         pass
     
     @abstractmethod
-    def convertparagraph(self, paragraph_item):
+    def convertParagraph(self, paragraph_item):
         pass
     
     @abstractmethod
-    def converthyperlink(self, hyperlink_item):
+    def convertHyperlink(self, hyperlink_item):
         pass
     
     @abstractmethod
-    def convertfooter(self, footer_item):
+    def convertFooter(self, footer_item):
         pass
 
 class HTMLConverter(ConverterInterface):
-    def convertheader(self, header_item):
+    def convertHeader(self, header_item):
         print("header converted")
     
-    def convertparagraph(self, paragraph_item):
+    def convertParagraph(self, paragraph_item):
         print("paragraph converted")
     
-    def converthyperlink(self, hyperlink_item):
+    def convertHyperlink(self, hyperlink_item):
         print("hyperlink converted")
     
-    def convertfooter(self, footer_item):
+    def convertFooter(self, footer_item):
         print("footer converted")
 
 if __name__ == "_main_":
