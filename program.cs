@@ -24,7 +24,9 @@ namespace ProductManagement
                 case 2:
                 Display();
                 break;
-                case 3:
+                case3:
+                Find();
+                case 4:
                 Exit();
                 break;
                 default:
@@ -39,7 +41,11 @@ namespace ProductManagement
         
     }
     static void Add()
-    {
+    {       int i;
+            Console.Write("how many products");
+            int x = Convert.ToInt32(Console.ReadLine());
+            for(i = 0 ; i< x; i++)
+            {
             Product prod = new Product();
             Console.Write("Enter Product Id: ");
             prod.ProdId = System.Convert.ToInt32(Console.ReadLine());
@@ -57,6 +63,7 @@ namespace ProductManagement
             prod.Discount = System.Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("stock" + Product.GetCounter() + "\n");
             products.Add(prod);
+            }
             
     }
     static void Display(){
@@ -69,6 +76,21 @@ namespace ProductManagement
 
             Console.WriteLine("Total Products: {Product.GetCounter()}");
         }
+    static void Find(){
+        
+        Console.WriteLine("choose product by id");
+        int m = Convert.ToInt32(Console.ReadLine());
+        foreach (var prod in products)
+            {
+                if (prod.ProdId == m)
+                {
+                    Console.WriteLine("Product Found:");
+                    Console.WriteLine(prod.Display());
+                    return; 
+                }
+            }
+
+    }
     static void Exit()
         {
             Console.WriteLine("Exiting the program");
