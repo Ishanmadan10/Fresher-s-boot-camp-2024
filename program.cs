@@ -14,7 +14,8 @@ namespace ProductManagement
                 Console.WriteLine("Menu:");
                 Console.WriteLine("1. Add ");
                 Console.WriteLine("2. Display");
-                Console.WriteLine("3. Exit");
+                Console.WriteLine("3. Find");
+                Console.WriteLine("4. Exit");
             choice = System.Convert.ToInt32(Console.ReadLine());
             switch(choice)
             {
