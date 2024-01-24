@@ -1,42 +1,55 @@
-
 using System;
-using System.Collections.Generic;
 namespace DoorProject{
-public interface IEventAggregator
+class Program
 {
-    void Subscribe<TEvent>(Action<TEvent> action) where TEvent : EventBase;
-    void Publish<TEvent>(TEvent @event) where TEvent : EventBase;
-}
-
-public class EventBase { }
-
-public class EventAggregator : IEventAggregator
-{
-    private readonly Dictionary<Type, List<Delegate>> _eventHandlers = new Dictionary<Type, List<Delegate>>();
-
-    public void Subscribe<TEvent>(Action<TEvent> action) where TEvent : EventBase
+    static void Main()
     {
-        var eventType = typeof(TEvent);
+        var eventAggregator = new EventAggregator();
 
-        if (!_eventHandlers.ContainsKey(eventType))
+        Console.WriteLine("Which door do you want? (Simple/Smart):");
+        string doorType = Console.ReadLine();
+
+        if (doorType.Equals("Simple", StringComparison.OrdinalIgnoreCase))
         {
-            _eventHandlers[eventType] = new List<Delegate>();
+            // Simple Door
+            var simpleDoor = new SimpleDoor(eventAggregator);
+
+            Console.WriteLine("Opening simple door...");
+            simpleDoor.Open();
+            Console.WriteLine("Closing simple door...");
+            simpleDoor.Close();
         }
-
-        _eventHandlers[eventType].Add(action);
-    }
-
-    public void Publish<TEvent>(TEvent @event) where TEvent : EventBase
-    {
-        var eventType = typeof(TEvent);
-
-        if (_eventHandlers.ContainsKey(eventType))
+        else if (doorType.Equals("Smart", StringComparison.OrdinalIgnoreCase))
         {
-            foreach (var handler in _eventHandlers[eventType])
+            // Smart Door
+            Console.WriteLine("Configuring smart door...");
+
+            Console.WriteLine("Do you want to use the buzzer? (yes/no):");
+            bool useBuzzer = Console.ReadLine().Equals("yes", StringComparison.OrdinalIgnoreCase);
+
+            Console.WriteLine("Do you want to use the notifier? (yes/no):");
+            bool useNotifier = Console.ReadLine().Equals("yes", StringComparison.OrdinalIgnoreCase);
+
+            Console.WriteLine("Do you want to enable auto close? (yes/no):");
+            bool autoClose = Console.ReadLine().Equals("yes", StringComparison.OrdinalIgnoreCase);
+
+            int timerInterval;
+            do
             {
-                ((Action<TEvent>)handler)?.Invoke(@event);
-            }
+                Console.WriteLine("Enter the timer interval in seconds:");
+            } while (!int.TryParse(Console.ReadLine(), out timerInterval) || timerInterval <= 0);
+
+            var smartDoor = new SmartDoor(eventAggregator, timerInterval * 1000); // Convert seconds to milliseconds
+
+            Console.WriteLine("Opening smart door...");
+            smartDoor.ActivateSmartFeatures(useBuzzer,  useNotifier, autoClose);
+            smartDoor.Open();
+        }
+        else
+        {
+            Console.WriteLine("Invalid door type. Please choose Simple or Smart.");
         }
     }
 }
+
 }
