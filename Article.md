@@ -33,7 +33,7 @@ Class diagrams, a fundamental aspect of the Unified Modeling Language (UML), off
 
 ## Example
 
-[![UML Class Diagram Example](https://i.imgur.com/YOPfET5.jpg)](https://imgur.com/a/P7jUtxy)
+![UML Class Diagram Example](https://github.com/Ishanmadan10/Fresher-s-boot-camp-2024/blob/main/LLDforRiskManagementSystem-_1_.jpg?raw=true)
 
 ## Conclusion
 
